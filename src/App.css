@@ -18,10 +18,13 @@ section {
   border-radius: 50%;
   padding: 10px 15px;
   z-index: 3;
+  font-size: 18px;
+  transition: backgroud-color 0,3s;
 }
 
 .floating-btn:hover {
   cursor: pointer;
+  background-color: #4e4ffa;
 }
 
 .center {
@@ -29,6 +32,10 @@ section {
 }
 
 header {
+  background-color: rgba(42, 45, 84, 0.9); /* slightly transparent */
+  backdrop-filter: blur(4px); /* blur effect if 3D scene is behind */
+  transition: background-color 0.3s;
+
   position: relative;
   z-index: 2;
   padding: 15px 0;
@@ -45,7 +52,8 @@ nav{
 }
 
 nav a {
-  margin-right: 20px;
+  right: auto;
+  margin-right: 25px;
   color: white;
   text-decoration: none;
 }
@@ -64,7 +72,7 @@ nav a:hover {
   left: 0;
   right: 0;
   background-color: rgba(102, 102, 251, 0.3);
-  z-index: 1;
+  z-index: 0;
 }
 .banner-section {
   margin-top: 0;
@@ -85,7 +93,7 @@ nav a:hover {
   color: white;
   font-weight: bold;
   text-transform: uppercase;
-  z-index: 2;
+  z-index: 1;
 }
 
 .banner p {
@@ -94,7 +102,7 @@ nav a:hover {
   font-size: 16px;
   margin: 30px 0;
   font-weight: bold;
-  z-index: 2;
+  z-index: 1;
 }
 
 .banner button {
@@ -104,7 +112,7 @@ nav a:hover {
   border-radius: 100px;
   background-color: #4e4ffa;
   border: none;
-  z-index: 2;
+  z-index: 1;
 }
 
 button:hover {
@@ -134,7 +142,7 @@ button:hover {
 }
 
 .custom-card:hover {
-  background-color: #4e4ffa;
+ background-color: rgba(0, 0, 0, 0.6); /* Transparent black with 60% opacity */
   transition: all 0.4s;
   cursor: pointer;
 }
@@ -234,23 +242,45 @@ button:hover {
 /* footer */
 footer {
   background-color: #2A2D54;
-  padding: 5px;
-  height: 50px;
+  padding: 10px;
+  height: 60px; /* Increased height for better spacing */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px; /* Added padding to give it more space */
 }
 
 .footer-p {
   color: #A8A9BF;
-  font-size: 12px;
-  padding-top: 10px;
+  font-size: 14px;
+  padding-top: 5px;
+  flex-grow: 1; /* Ensures that the text will take available space and push icons to the right */
 }
 
+/* Align icons to the right */
 .footer-icons {
-  text-align: right;
+  display: flex;
+  justify-content: flex-end; /* Aligns icons to the right */
+  gap: 20px; /* Adds space between icons */
 }
 
+/* Footer Icons */
 .footer-icons img {
   padding: 10px;
   height: 40px;
+  transition: transform 0.3s ease, filter 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+  will-change: transform;
+  position: relative;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  background-color: transparent; /* Default background */
+}
+
+.footer-icons img:hover {
+  transform: translateY(-10px) scale(1.1); /* Slightly scale the image and move it up */
+  filter: brightness(1.2); /* Increases brightness on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Adds more shadow to give the "lifted" effect */
+  background-color: rgba(78, 79, 250, 0.3); /* New background color when hovered */
 }
 
 .footer-icons a {
@@ -258,7 +288,7 @@ footer {
 }
 
 
-@media (min-width: 1920px) and (max-width: 1920px){
+/* @media (min-width: 1920px) and (max-width: 1920px){
   .custom-container {
       width: 1000px;
       margin: 0 auto;
@@ -266,5 +296,73 @@ footer {
 
   .banner-section::before {
       height: 860px;
+  }
+} */
+ /* ========== RESPONSIVE MEDIA QUERIES ========== */
+@media (max-width: 1024px) {
+  nav {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .banner h1 {
+    font-size: 2rem;
+  }
+
+  .custom-card {
+    flex: 1 1 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav {
+    text-align: center;
+    width: 100%;
+  }
+
+  .banner h1 {
+    font-size: 1.6rem;
+  }
+
+  .banner button {
+    padding: 8px 20px;
+  }
+
+  .footer-icons {
+    justify-content: center;
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .floating-btn {
+    right: 10px;
+    bottom: 10px;
+    font-size: 16px;
+  }
+
+  .custom-card {
+    flex: 1 1 100%;
+  }
+
+  .banner {
+    padding: 60px 10px;
+  }
+
+  .banner h1 {
+    font-size: 1.4rem;
+  }
+
+  .banner p {
+    font-size: 0.9rem;
   }
 }

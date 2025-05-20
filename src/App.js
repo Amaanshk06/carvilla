@@ -8,9 +8,17 @@ import Client from './components/Client.js';
 import Footer from './components/Footer.js';
 
 function App() {
+      // Function to scroll to the top
+  const scrollToTop = (e) => {
+    e.preventDefault(); // Prevents the default behavior (anchor link)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Smooth scroll effect
+    });
+  };
     return (
         <>
-            <a className="floating-btn" href="">/\</a>
+            <a className="floating-btn" href="#" onClick={scrollToTop}>/\</a>
 
             {/* header start */}
 
