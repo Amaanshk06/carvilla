@@ -1,4 +1,4 @@
-function Banner() {
+function Banner({onContactClick}) {
     return(
         <section className="banner-section">
             <div className="banner">
@@ -6,7 +6,7 @@ function Banner() {
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor<br />
                     incididunt ut labore etuolore magna aliqua.
                 </p>
-                <button>Contact US</button>
+                <button  className="btn-c"  onClick={onContactClick}>Contact US</button>
             </div>
         </section>
     );

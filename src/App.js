@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Info from './components/Info.js';
 import Header from './components/Header.js';
@@ -8,56 +8,83 @@ import Client from './components/Client.js';
 import Footer from './components/Footer.js';
 
 function App() {
-      // Function to scroll to the top
-  const scrollToTop = (e) => {
-    e.preventDefault(); // Prevents the default behavior (anchor link)
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth' // Smooth scroll effect
-    });
-  };
+    const [showPopup, setShowPopup] = useState(false);
+
+    // Function to scroll to the top
+    const scrollToTop = (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    };
+
+    const togglePopup = () => {
+        setShowPopup(prev => !prev);
+    };
+
+    // Attach event listener to "Contact" link in Header after mount
+    useEffect(() => {
+        const contactLinks = document.querySelectorAll('nav a');
+        contactLinks.forEach(link => {
+            if (link.textContent.trim().toLowerCase() === 'contact') {
+                link.addEventListener('click', handleContactClick);
+            }
+        });
+
+        return () => {
+            contactLinks.forEach(link => {
+                if (link.textContent.trim().toLowerCase() === 'contact') {
+                    link.removeEventListener('click', handleContactClick);
+                }
+            });
+        };
+    }, []);
+
+    const handleContactClick = (e) => {
+        e.preventDefault();
+        togglePopup();
+    };
+
     return (
         <>
             <a className="floating-btn" href="#" onClick={scrollToTop}>/\</a>
 
-            {/* header start */}
-
             <Header />
 
-            {/* header end */}
             <main>
-                {/* banner start */}
-
-                <Banner />
-
-                {/* banner end */}
+                <Banner onContactClick={togglePopup} />
 
                 <div className="custom-container">
-
-                    {/* info Start */}
-
                     <Info />
-
-                    {/* info end */}
-
-                    {/*  featured cars start  */}
-
                     <Featured />
-
-                    {/*  featured cars end */}
-
-                    {/*  client start */}
-
                     <Client />
-
-                    {/*  client end */}
                 </div>
             </main>
-            {/* footer start*/}
 
             <Footer />
 
-            {/* footer end */}
+            {/* Popup Contact Form */}
+            {showPopup && (
+                <div className="popup-overlay">
+                    <div className="popup-form">
+                        <button className="close-btn" onClick={togglePopup}>×</button>
+                        <h2>Contact Us</h2>
+                        <form>
+                            <label>Name:</label>
+                            <input type="text" placeholder="Your Name" required />
+
+                            <label>Email:</label>
+                            <input type="email" placeholder="Your Email" required />
+
+                            <label>Message:</label>
+                            <textarea placeholder="Your message here..." required></textarea>
+
+                            <button type="submit">Send</button>
+                        </form>
+                    </div>
+                </div>
+            )}
         </>
     );
 }
